@@ -282,3 +282,69 @@ var reduce = function(nums, fn, init) {
         //TC: O(N);
         //SC: O(1);
     };
+
+/**_____________________________________________________
+    2677. Chunk Array
+    Given an array arr and a chunk size size, return a chunked array. A chunked array contains the original elements in arr, but consists of subarrays each of length size. The length of the last subarray may be less than size if arr.length is not evenly divisible by size.
+
+    You may assume the array is the output of JSON.parse. In other words, it is valid JSON.
+
+    Please solve it without using lodash's _.chunk function.
+
+    Input: arr = [1,2,3,4,5], size = 1
+    Output: [[1],[2],[3],[4],[5]]
+    Explanation: The arr has been split into subarrays each with 1 element.
+    TC: O(N);
+    SC: O(N);
+ */ 
+    var chunk = function(arr, size) {
+        //create new empty array; 
+        let newArr = [];
+        //loop through the array 
+        for (let i = 0; i < arr.length; i += size){
+            newArr.push(arr.slice(i, i + size))
+        // pushed the arr that slices i and then size (i - is the starting index and i+size is the end)
+        }
+        return newArr;
+    };
+
+/**_____________________________________________________
+    2619. Array Prototype Last
+    Write code that enhances all arrays such that you can call the array.last() method on any array and it will return the last element. If there are no elements in the array, it should return -1.
+
+    You may assume the array is the output of JSON.parse.
+    TC: O(N);
+    SC: O(N);
+
+ */ 
+    Array.prototype.last = function() {
+        if(this.length === 0 ){
+            return -1; 
+        } else{
+                return this[this.length - 1];
+        }
+        
+    };
+
+/**_____________________________________________________
+    2724. Sort By
+    Given an array arr and a function fn, return a sorted array sortedArr. You can assume fn only returns numbers and those numbers determine the sort order of sortedArr. sortedArray must be sorted in ascending order by fn output.
+
+    You may assume that fn will never duplicate numbers for a given array.
+    TC: O(n log n);
+    SC: O(n);
+ */ 
+
+    var sortBy = function(arr, fn) {
+        if (arr.length <= 1) {
+          return arr;
+      }
+       const compareFn = (a, b) => fn(a) - fn(b);
+      
+        const sortedArr = arr.slice().sort(compareFn);
+      
+        return sortedArr;
+      
+      }
+      
+    
