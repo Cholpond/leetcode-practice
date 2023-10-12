@@ -463,3 +463,33 @@ var reduce = function(nums, fn, init) {
             return this.result;
         }
     }
+
+/**_________________________________
+ * 58. Length of Last Word
+    Given a string s consisting of words and spaces, return the length of the last word in the string.
+
+    A word is a maximal substring consisting of non-space characters only.
+    Example 1:
+
+    Input: s = "Hello World"
+    Output: 5
+    Explanation: The last word is "World" with length 5.
+
+    The function creates a new array to store the words in the string. The size of this array will be equal to the number of words in the string.
+    The function also creates a new variable to store the length of the last word in the string.
+    TC: O(N);
+    SC: O(N);
+ * 
+ */
+//Solution of Length of Last Word
+    var lengthOfLastWord = function(s) {
+        //to find the last word in the string, convert string into array
+        //loop through the array 
+        //return the length of the last element in the array 
+        if(s.length === 0) return 0;
+    
+        const arrayOfWords = s.trim().split(' ');
+        const lastWordLength = arrayOfWords[arrayOfWords.length -1].length;
+        return lastWordLength;
+    };
+    
