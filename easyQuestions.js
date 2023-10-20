@@ -493,3 +493,67 @@ var reduce = function(nums, fn, init) {
         return lastWordLength;
     };
     
+/**_________________________________
+ * 680. Valid Palindrome II
+    Given a string s, return true if the s can be palindrome after deleting at most one character from it.
+
+    Example 1:
+
+    Input: s = "aba"
+    Output: true
+    Example 2:
+
+    Input: s = "abca"
+    Output: true
+    Explanation: You could delete the character 'c'.
+    Example 3:
+
+    Input: s = "abc"
+    Output: false
+    
+    TC: O(N);
+    SC: O(1);
+ * 
+ */
+//Solution of the Valid Palindrome II: 
+function validPalindrome(s) {
+    // Check if the string is empty or has only one character.
+    if (s.length <= 1) {
+      return true;
+    }
+  
+    // Create two pointers to iterate through the string.
+    let left = 0;
+    let right = s.length - 1;
+  
+    while (left < right) {
+      if (s[left] !== s[right]) {
+        // If the characters are not equal, check two possibilities:
+        // 1. Remove the character on the left.
+        // 2. Remove the character on the right.
+        // If either of these options results in a palindrome, return true.
+        return (
+          isPalindrome(s, left + 1, right) || isPalindrome(s, left, right - 1)
+        );
+      }
+      // Move the pointers closer to the middle.
+      left++;
+      right--;
+    }
+  
+    // If we reach this point, the string is a palindrome.
+    return true;
+  }
+  
+  function isPalindrome(s, left, right) {
+    while (left < right) {
+      if (s[left] !== s[right]) {
+        return false;
+      }
+      left++;
+      right--;
+    }
+    return true;
+  }
+ 
+
