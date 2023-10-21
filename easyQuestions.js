@@ -557,3 +557,101 @@ function validPalindrome(s) {
   }
  
 
+/**_________________________________
+ * 121. Best Time to Buy and Sell Stock
+  You are given an array prices where prices[i] is the price of a given stock on the ith day.
+
+    You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+
+    Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+
+    Example 1:
+
+    Input: prices = [7,1,5,3,6,4]
+    Output: 5
+    Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+    Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
+ * 
+ */
+// Solution for Best Time to Buy and Sell Stock:
+    var maxProfit = function(prices) {
+
+        let maxProfit = 0;
+        let minPrice = prices[0];
+        for(let i = 1; i < prices.length; i++){
+        let sellPrice = prices[i];
+        let profit = sellPrice - minPrice;
+        maxProfit = Math.max(maxProfit, profit);
+        if(sellPrice < minPrice) minPrice = sellPrice
+        }
+        return maxProfit;
+    };
+//TC: O(N);
+//SC: O(1);
+
+/**_________________________________
+    977. Squares of a Sorted Array
+    Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
+
+    Example 1:
+
+    Input: nums = [-4,-1,0,3,10]
+    Output: [0,1,9,16,100]
+    Explanation: After squaring, the array becomes [16,1,0,9,100].
+    After sorting, it becomes [0,1,9,16,100].
+
+ * 
+ */
+//Solution for the Squares of a Sorted Array: 
+    var sortedSquares = function(nums) {
+        // use two pointers
+        // create a new array
+        const result = [];
+        let left = 0, 
+            right = nums.length - 1;
+        
+        // don't want to rearrange the array, so iterating the array in descending order 
+        for (let i = nums.length - 1; i >= 0; i--) {
+            if (Math.abs(nums[left]) < Math.abs(nums[right])) {
+                result[i] = nums[right] ** 2
+                right--;
+            } else {
+                result[i] = nums[left] ** 2
+                left++;
+            }
+        }
+        
+        return result;
+    };
+// TC: O(N);
+//SC: O(N);
+
+/**_________________________________
+    88. Merge Sorted Array
+    You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
+
+    Merge nums1 and nums2 into a single array sorted in non-decreasing order.
+
+    The final sorted array should not be returned by the function, but instead be stored inside the array nums1. To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements that should be merged, and the last n elements are set to 0 and should be ignored. nums2 has a length of n.
+
+    Example 1:
+
+    Input: nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+    Output: [1,2,2,3,5,6]
+    Explanation: The arrays we are merging are [1,2,3] and [2,5,6].
+    The result of the merge is [1,2,2,3,5,6] with the underlined elements coming from nums1.
+ * 
+ */
+//Solution for Merge Sorted Array: 
+    var merge = function(nums1, m, nums2, n) {
+        while (n) {
+        if (nums1[m - 1] > nums2[n - 1]) {
+            nums1[m + n - 1] = nums1[--m];  
+        } else {
+            nums1[m + n - 1] = nums2[--n];   
+        }
+        }
+        return nums1;
+    };
+//TC: O(m+n);
+//SC: O(1)
