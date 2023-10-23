@@ -655,3 +655,65 @@ function validPalindrome(s) {
     };
 //TC: O(m+n);
 //SC: O(1)
+
+/* 448. Find All Numbers Disappeared in an Array
+    Given an array nums of n integers where nums[i] is in the range [1, n], return an array of all the integers in the range [1, n] that do not appear in nums.
+
+    Example 1:
+
+    Input: nums = [4,3,2,7,8,2,3,1]
+    Output: [5,6]
+*/
+
+//Solution for 448. Find All Numbers Disappeared in an Array
+    var findDisappearedNumbers = function(nums) {
+        const missingNumbers = [];
+
+        // Step 1: Mark elements by negating their corresponding index
+        for (let i = 0; i < nums.length; i++) {
+            const index = Math.abs(nums[i]) - 1; // Calculate the index to mark
+            if (nums[index] > 0) {
+                nums[index] = -nums[index]; // Negate the value at the calculated index
+            }
+        }
+
+        // Step 2: Find elements with positive values
+        for (let i = 0; i < nums.length; i++) {
+            if (nums[i] > 0) {
+                missingNumbers.push(i + 1); // Add the index plus 1 to missingNumbers
+            }
+        }
+
+        return missingNumbers; // Return the missingNumbers array
+    };
+
+//TC: O(N);
+//SC: O(1);
+
+/* 231. Power of Two
+    Given an integer n, return true if it is a power of two. Otherwise, return false.
+
+    An integer n is a power of two, if there exists an integer x such that n == 2x.
+*/
+
+//Solution for 231. Power of Two:
+    var isPowerOfTwo = function(n) {
+        if(n === 1){
+            return true;
+        }
+
+        if( n % 2 !==0 || n < 1){
+            return false; 
+        }
+
+        return isPowerOfTwo(n / 2);
+    };
+
+//TC and SC: O(log2n)
+/*Time Complexity (TC):
+The time complexity of this function is O(log2(n)). This is because, in each recursive call, the input n is divided by 2, and the recursion continues until n becomes 1 or less. The number of times you can divide n by 2 to reach 1 is log2(n). Therefore, the time complexity is logarithmic in terms of the input n.
+
+Space Complexity (SC):
+The space complexity of this function is O(log2(n)) as well. This is because the function makes a recursive call for each halving of n. The recursion stack grows logarithmically with the input n. Each recursive call consumes some space on the stack, and when the recursion depth reaches log2(n), the stack space usage is maximized.*/
+
+
